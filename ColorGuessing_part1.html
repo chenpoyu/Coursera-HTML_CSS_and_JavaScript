@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<title>Javascript Guessing Game</title>
+		<script type="text/javascript">
+			var guess_input_text;
+			var guess_count = 0;
+			var finished = false;
+			var color_array = ["black", "blue", "cyan", "green", "orange", "purple", "red", "silver", "violet", "yellow"];
+			var target_int = Math.floor(Math.random() * color_array.length);
+			
+			function do_game() {
+				var target_color = color_array[target_int];
+				alert("Here is the answer: " + target_color);
+				
+				var title = "I'm thinking of one of these colors: \n\n";
+				for (var i = 0; i < color_array.length; i++) {
+					title += color_array[i];
+					if (i < color_array.length - 1)
+						title += ", ";
+				}
+				title += "\n\n What color am I thinking of?";
+				
+				while (!finished) {
+					guess_input_text = prompt(title);
+					guess_count++;
+					if (target_color == guess_input_text)
+					{
+						alert("correct!");
+						finished = true;
+					}
+				}
+			}
+		</script>
+	</head>
+	<body onload="do_game()">
+	</body>
+</html>

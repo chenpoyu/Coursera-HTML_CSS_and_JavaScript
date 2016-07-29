@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<title>Javascript Guessing Game</title>
+		<script type="text/javascript">
+			var guess_input_text;
+			var guess_count = 0;
+			var finished = false;
+			var color_array = ["black", "blue", "cyan", "green", "orange", "purple", "red", "silver", "violet", "yellow"];
+			var target_int = Math.floor(Math.random() * color_array.length);
+			var target = color_array[target_int];
+			
+			function do_game() {
+				alert("Here is the answer: " + target);
+				
+				var title = "I'm thinking of one of these colors: \n\n";
+				// Mark after refering other task's of classmates
+				// for (var i = 0; i < color_array.length; i++) {
+				// 	title += color_array[i];
+				// 	if (i < color_array.length - 1)
+				// 		title += ", ";
+				// }
+				title += color_array.join(", ");
+				title += "\n\n What color am I thinking of?";
+				
+				while (!finished) {
+					guess_input_text = prompt(title);
+					guess_count++;
+					finished = check_guess();
+				}
+			}
+			
+			function check_guess() {
+				// Mark after refering other task's of classmates
+				// var guess_int = "a";
+				// for (var i = 0; i < color_array.length; i++) {
+				// 	if (guess_input_text == color_array[i]) {
+				// 		guess_int = i;
+				// 		break;
+				// 	}
+				// }
+				
+				//if (isNaN(guess_int)) {
+				if (color_array.indexOf(guess_input_text) == -1) {
+					alert("Sorry, I don't recognize that color! \n\n Please try again.");
+					return false;
+				}
+				//if (guess_int > target_int) {
+				if (target < guess_input_text) {
+					alert("Sorry, your guess is not correct! \n\n Hint: Your input is alphabetically higher than mine! \n\n Please try again.");
+					return false;
+				}
+				//if (guess_int < target_int) {
+				if (target > guess_input_text) {
+					alert("Sorry, your guess is not correct! \n\n Hint: Your input is alphabetically lower than mine! \n\n Please try again.");
+					return false;
+				}
+				
+				document.body.style.background = target;
+				alert("Congratulations! You have guessed the color! \n\n It took you " + guess_count + " guesses to finish the game! \n\n "
+					+ "You can see the color in the background.");
+				return true;
+			}
+		</script>
+	</head>
+	<body onload="do_game()">
+	</body>
+</html>
